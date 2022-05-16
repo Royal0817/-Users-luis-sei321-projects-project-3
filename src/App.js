@@ -1,10 +1,8 @@
-import './App.css';
-import React from 'react';
-import LoginButton from './components/LoginButton';
-import LogoutButton from './components/LogoutButton'
+import './styles/App.css'
+import React from 'react'
 import Map from './components/Map'
-import Profile from './components/Profile'
 import { useAuth0 } from '@auth0/auth0-react'
+import Nav from './components/Nav';
 
 function Main() {
   const { isLoading } = useAuth0;
@@ -14,9 +12,7 @@ function Main() {
   return (
     <>
     
-      <LoginButton />
-      <LogoutButton />
-      <Profile />
+      <Nav />
       
 
     </>

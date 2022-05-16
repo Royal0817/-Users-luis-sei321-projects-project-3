@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './styles/index.css';
 import Main from './App';
 import Map from './components/Map'
 import { Auth0Provider } from '@auth0/auth0-react'; 
