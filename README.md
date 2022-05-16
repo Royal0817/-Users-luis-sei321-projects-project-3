@@ -18,6 +18,6 @@ This app is made for friends reccomendations of resturants or places to go over 
 1. Google Maps Platform Docs - https://cloud.google.com/apis/docs/getting-started?_ga=2.2238512.-1661291439.1652457435
 2. Auth0 API Docs - https://auth0.com/docs/quickstart/spa/react/interactive
 
-
+![My Image](miroplanning1.png)
 
 
