@@ -1,5 +1,6 @@
-import React, { useState} from 'react'
+import React, { useState, useCallback, useRef} from 'react'
 import { useLoadScript, GoogleMap, Marker, InfoWindow} from '@react-google-maps/api'
+// import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
 const center = { lat: 38.8960499, lng: -77.0648878}
 const options = { 
@@ -7,12 +8,13 @@ const options = {
 }
 
 const mapContainerStyle = {
-    width: '100vw',
-    height: '100vh'
+    width: '65vw',
+    height: '65vh'
     
 } 
 
 const libraries = ['places'];
+
 const Map = () => {
     
     const { isLoaded, LoadError  } = useLoadScript ({
@@ -21,9 +23,9 @@ const Map = () => {
         libraries
     });
 
-    const [markers, setMarkers] = React.useState([]);
-    
-    const onMapClick = React.useCallback((e) => {
+    const [markers, setMarkers] = useState([]); 
+    // const [markerSelect, setMarkerSelect] = useState
+    const onMapClick = useCallback((e) => {
         setMarkers((current) => [
             ...current, 
             {
@@ -33,6 +35,11 @@ const Map = () => {
             },
         ])
     }, [])
+
+    const mapRef = useRef();
+    const onMapLoad = useCallback((map) => {
+        mapRef.current = map;
+    }, []);
 
     if (LoadError) return 'Error Loading Maps';
     if (!isLoaded) return  <h1>Loading....</h1>; 
@@ -46,9 +53,8 @@ const Map = () => {
             zoom={13} 
             center={center} 
             options={options} 
-            onClick={(e) => {
-                
-            }}>  
+            onClick={onMapClick}
+            onLoad={onMapLoad}>  
 
         {/* Sets marker for reccomendation */}
         {markers.map((marker) => (

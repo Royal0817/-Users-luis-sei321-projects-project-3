@@ -9,10 +9,25 @@ body {
 }
 
 button {
-  margin: 2rem;
-  padding: 1rem 2rem;
+  margin: 1em;
+  padding: 1em 2em;
   cursor: pointer;
-  
 }
 
+.Nav {
+  display: flex;
+  background-color: green;
+}
 
+.profile {
+  display: flex;
+  justify-content: right;
+}
+
+.container {
+  display: inline;
+}
+
+.userlogin {
+  display: flex;
+}
