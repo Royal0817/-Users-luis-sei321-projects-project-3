@@ -1,17 +1,19 @@
 import React, { useState, useCallback, useRef} from 'react'
 import { useLoadScript, GoogleMap, Marker, InfoWindow} from '@react-google-maps/api'
+import { useAuth0 } from '@auth0/auth0-react'
+import Profile from './Profile'
 // import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
 const center = { lat: 38.8960499, lng: -77.0648878}
 const options = { 
     mapId: process.env.REACT_APP_MAP_ID
-}
+};
 
 const mapContainerStyle = {
-    width: '65vw',
-    height: '65vh'
+    width: '75vw',
+    height: '75vh'
     
-} 
+};
 
 const libraries = ['places'];
 
@@ -24,7 +26,8 @@ const Map = () => {
     });
 
     const [markers, setMarkers] = useState([]); 
-    // const [markerSelect, setMarkerSelect] = useState
+    const [markerSelect, setMarkerSelected] = useState(null);
+
     const onMapClick = useCallback((e) => {
         setMarkers((current) => [
             ...current, 
@@ -34,7 +37,7 @@ const Map = () => {
             time: new Date() 
             },
         ])
-    }, [])
+    }, []);
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
@@ -60,9 +63,21 @@ const Map = () => {
         {markers.map((marker) => (
             <Marker 
                 key={marker.time.toISOString()} 
-                 position={{ lat: marker.lat, lng: marker.lng}} />
+                 position={{ lat: marker.lat, lng: marker.lng}} 
+                 onClick={() => {
+                     setMarkerSelected(marker)
+                 }}/>
         ))} 
-
+        {markerSelect ? (
+            <InfoWindow position={{lat: markerSelect.lat, lng: markerSelect.lng}}>
+                <div className='Referred'> 
+                    <h2>
+                        Referred by me
+                    </h2>
+                </div> 
+        </InfoWindow>
+        ): null}
+        <Profile />
         </GoogleMap>
 
        
