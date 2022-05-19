@@ -2,26 +2,35 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import Main from './App';
-import Map from './components/Map'
+// import Map from './components/Map'
 import { Auth0Provider } from '@auth0/auth0-react'; 
+//  import PrivateRoute from './components/PrivateRoute.js'
+ import SignIn from './components/SignIn.js'
+ import Nav from './components/Nav.js'
+ import { BrowserRouter as Router } from 'react-router-dom'
+ import { Routes, Route } from 'react-router-dom'
+  
 
-
-// const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-// console.log(domain)
-// const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  
+    <Router>
       <Auth0Provider
-          domain='dev-1qstcv1r.us.auth0.com'
-          clientId='2aeUm3Gja9Cv9T5NrpEHWEU8nD1w4yJS'
+          domain={domain}
+          clientId={clientId}
           redirectUri={window.location.origin}
-        >
-        <Main />
+      >
+          <Nav /> 
+          <Routes>
+            <Route path='/' element={<Main />} >
+              <Route path='signin/' element={<SignIn />} />
+            </Route>
+          </Routes>
         </Auth0Provider>
-        <Map />
+    </Router>
 
     </React.StrictMode>
 );

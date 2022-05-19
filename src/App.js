@@ -1,17 +1,22 @@
 import './styles/App.css'
 import React from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
-import Nav from './components/Nav';
+// import Nav from './components/Nav';
+// import { Routes, Route } from 'react-router-dom'
+import Map from './components/Map'
+// import { withAuthenticationRequired } from '@auth0/auth0-react'
+// import { Loading } from './'
+// import { Link } from 'react-router-dom'
+import { Outlet } from 'react-router'
+
+
 
 function Main() {
-  const { isLoading } = useAuth0;
-
-  if (isLoading) return <div>Loading....</div>
-
   return (
-    <div className='container'>
-      <Nav />
-    </div>
+    <>
+      <Outlet />
+      <Map />
+    </>
+    
   );
 }
 
