@@ -7,14 +7,13 @@ import Map from './components/Map'
 // import { Loading } from './'
 // import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router'
-
-
+import LoginButton from './components/LoginButton'
 
 function Main() {
   return (
     <>
       <Outlet />
-      <Map />
+      <LoginButton />
     </>
     
   );

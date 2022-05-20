@@ -1,6 +1,6 @@
 import React from 'react'
 // import LoginButton from './LoginButton';
-// import LogoutButton from './LogoutButton';
+import LogoutButton from './LogoutButton';
 // import Profile from './Profile';
 import { Link } from 'react-router-dom'
 
@@ -10,9 +10,7 @@ const Nav = (props) => {
       <Link to='/'>
        <div>Home</div>
       </Link>
-      <Link to='signin/'>
-        <div>Sign In</div>
-      </Link>
+      <LogoutButton />
 
      
     </div>
