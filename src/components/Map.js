@@ -9,6 +9,10 @@ import {
     ComboBoxList,
     ComboBoxOption,
 } from '@reach/combobox'
+import usePlacesAutocomplete, {
+    getGeocode,
+    getLatLng,
+} from 'use-places-autocomplete'
 // import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
 
@@ -89,10 +93,32 @@ const Map = () => {
         ): null}
         {/* <Profile /> */}
         </GoogleMap>
-
-       
         </>
-    )
-} 
+
+        )
+    } 
+    function Search() {
+        const {ready, value, suggestions: { status, data}, setValue, clearSuggestion,} = usePlacesAutocomplete({
+            requestOptions: {
+                location:{ lat: () => 38.8960499, lng: () => -77.0648878 },
+                radius: 175 * 1000,
+            }
+        });
+        return (
+        <>
+        <ComboBox onSelect={(address) => {
+            console.log(address) 
+        }}>
+            <ComboBoxInput value={value} onChange={(e) => {
+                setValue(e.target.value);   
+            }}
+            disabled={!ready}
+            placeholder='Enter a Reference'
+            />
+        </ComboBox>
+        </>
+        )
+
+    }
 
 export default Map
