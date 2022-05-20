@@ -6,7 +6,7 @@ import Main from './App';
 import { Auth0Provider } from '@auth0/auth0-react'; 
 //  import PrivateRoute from './components/PrivateRoute.js'
  import SignIn from './components/SignIn.js'
- import Nav from './components/Nav.js'
+//  import Nav from './components/Nav.js'
  import { BrowserRouter as Router } from 'react-router-dom'
  import { Routes, Route } from 'react-router-dom'
   
@@ -23,7 +23,6 @@ root.render(
           clientId={clientId}
           redirectUri={`${window.location.origin}/signin`}
       >
-          
           <Routes>
             <Route path='/' element={<Main />} >
               <Route path='signin/' element={<SignIn />} />

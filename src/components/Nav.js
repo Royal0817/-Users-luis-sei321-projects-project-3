@@ -1,7 +1,7 @@
 import React from 'react'
 // import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
-// import Profile from './Profile';
+import Profile from './Profile';
 import { Link } from 'react-router-dom'
 
 const Nav = (props) => {
@@ -10,6 +10,10 @@ const Nav = (props) => {
       <Link to='/'>
        <div>Home</div>
       </Link>
+       <Link to='/signin'>
+       <div>Reccomendations</div>
+      </Link>
+      <Profile />
       <LogoutButton />
 
      
@@ -17,4 +21,3 @@ const Nav = (props) => {
   )
 }
 export default Nav
-// export default withAuthenticationRequired(Nav, {onRedirecting: () => <h1>hello world</h1> })

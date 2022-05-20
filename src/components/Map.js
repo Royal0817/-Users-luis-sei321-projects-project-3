@@ -1,8 +1,16 @@
 import React, { useState, useCallback, useRef} from 'react'
 import { useLoadScript, GoogleMap, Marker, InfoWindow} from '@react-google-maps/api'
-import { useAuth0 } from '@auth0/auth0-react'
-import Profile from './Profile'
+// import { useAuth0 } from '@auth0/auth0-react'
+// import Profile from './Profile'
+import { 
+    ComboBox,
+    ComboBoxInput,
+    ComboBoxPopOver,
+    ComboBoxList,
+    ComboBoxOption,
+} from '@reach/combobox'
 // import { Wrapper, Status } from "@googlemaps/react-wrapper";
+
 
 const center = { lat: 38.8960499, lng: -77.0648878}
 const options = { 
@@ -50,6 +58,8 @@ const Map = () => {
 
     return (
         <>
+        
+
         {/* // Renders map onto page */}
         <GoogleMap 
             mapContainerStyle={mapContainerStyle} 
@@ -77,7 +87,7 @@ const Map = () => {
                 </div> 
         </InfoWindow>
         ): null}
-        <Profile />
+        {/* <Profile /> */}
         </GoogleMap>
 
        

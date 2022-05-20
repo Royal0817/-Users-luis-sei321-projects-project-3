@@ -8,7 +8,7 @@ const Profile = () => {
       isAuthenticated &&
       <div className='profile'>
         <img src={user.picture} alt={user.name}/>
-        <h2> {user.name}</h2>
+        <h3> Welcome {user.name}</h3>
         {/* <p>{user.email}</p> */}
         {/* {JSON.stringify(user, null, 2)} */}
     </div>

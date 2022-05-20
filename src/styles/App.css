@@ -1,11 +1,7 @@
-* {
-  margin: 0;
-  padding:0;
-  box-sizing: border-box;
-}
 
 body {
-  padding: 2rem
+  padding: 2rem;
+  background-image: linear-gradient(to right, rgb(52, 91, 75), rgb(51, 139, 147));
 }
 
 button {
@@ -14,20 +10,12 @@ button {
   cursor: pointer;
 }
 
-.Nav {
+/* .Nav {
   display: flex;
   background-color: green;
-}
+} */
 
-.profile {
+/* .profile {
   display: flex;
   justify-content: right;
-}
-
-.container {
-  display: inline;
-}
-
-.userlogin {
-  display: flex;
-}
+} */
