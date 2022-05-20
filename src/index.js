@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import Main from './App';
-// import Map from './components/Map'
+
 import { Auth0Provider } from '@auth0/auth0-react'; 
-//  import PrivateRoute from './components/PrivateRoute.js'
+
  import SignIn from './components/SignIn.js'
-//  import Nav from './components/Nav.js'
+
  import { BrowserRouter as Router } from 'react-router-dom'
  import { Routes, Route } from 'react-router-dom'
   

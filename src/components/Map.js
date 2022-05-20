@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useRef} from 'react'
 import { useLoadScript, GoogleMap, Marker, InfoWindow} from '@react-google-maps/api'
-// import { useAuth0 } from '@auth0/auth0-react'
-// import Profile from './Profile'
+
 import { 
     ComboBox,
     ComboBoxInput,
@@ -13,7 +12,7 @@ import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
 } from 'use-places-autocomplete'
-// import { Wrapper, Status } from "@googlemaps/react-wrapper";
+
 
 
 const center = { lat: 38.8960499, lng: -77.0648878}

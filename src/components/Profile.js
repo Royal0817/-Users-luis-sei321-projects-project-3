@@ -9,8 +9,7 @@ const Profile = () => {
       <div className='profile'>
         <img src={user.picture} alt={user.name}/>
         <h3> Welcome {user.name}</h3>
-        {/* <p>{user.email}</p> */}
-        {/* {JSON.stringify(user, null, 2)} */}
+       
     </div>
   )
 }
