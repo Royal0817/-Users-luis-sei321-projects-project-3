@@ -21,11 +21,11 @@ root.render(
       <Auth0Provider
           domain={domain}
           clientId={clientId}
-          redirectUri={`${window.location.origin}/signin`}
+          redirectUri={`${window.location.origin}`}
       >
           <Routes>
             <Route path='/' element={<Main />} >
-              <Route path='signin/' element={<SignIn />} />
+              {/* <Route path='signin/' element={<SignIn />} /> */}
             </Route>
           </Routes>
         </Auth0Provider>
