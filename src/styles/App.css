@@ -12,7 +12,7 @@ button {
 
 #root {
   height: 100px;
-  background-color: green;
+  /* background-color: green; */
 }
 
 .Nav-Bar {
@@ -50,4 +50,10 @@ div.userlogin {
   display: flex;
   justify-content: right;
 
+}
+
+.search {
+  transform: translateX(-50%);
+  max-width: 400px;
+  z-index: 10;
 }

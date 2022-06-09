@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef} from 'react'
 import { useLoadScript, GoogleMap, Marker, InfoWindow} from '@react-google-maps/api'
-
+import Search from './Search'
 
 
 
@@ -22,7 +22,7 @@ const Map = () => {
     
     const { isLoaded, LoadError  } = useLoadScript ({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
-        // googleMapsPlaces: process.env.REACT_APP_PLACES_API,
+        googleMapsPlaces: process.env.REACT_APP_PLACES_API,
         libraries
     });
 
@@ -54,7 +54,7 @@ const Map = () => {
 
     return (
         <>
-        
+        <Search />
 
         {/* // Renders map onto page */}
         <GoogleMap 
@@ -84,10 +84,12 @@ const Map = () => {
         </InfoWindow>
         ): null}
         </GoogleMap>
+
         </>
 
         )
     } 
+    
   
 
 export default Map
