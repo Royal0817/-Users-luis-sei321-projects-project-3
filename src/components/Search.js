@@ -1,5 +1,5 @@
 import usePlacesAutoComplete, {
-    getGeoCode,
+    getGeocode,
     getLatLng,
 } from 'use-places-autocomplete';
 import {
@@ -26,8 +26,13 @@ function Search() {
 
     return (
         <div className='search'>
-            <Combobox onSelect={(address) => {
-                console.log(address)
+            <Combobox onSelect={ async (address) => {
+                try {
+                    const results = await getGeocgitode({address});
+                    console.log(results[0])
+                } catch (error) {
+                    console.log('Error with Async Search!')
+                }
             }}>
                 <ComboboxInput 
                 value={value} 
