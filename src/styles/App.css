@@ -1,8 +1,5 @@
+/* 
 
-body {
-  padding: 2rem;
-  background-image: linear-gradient(to right, rgb(52, 91, 75), rgb(51, 139, 147));
-}
 
 button {
   margin: 1em;
@@ -12,18 +9,12 @@ button {
 
 #root {
   height: 100px;
-  /* background-color: green; */
-}
+  background-color: green;
+} 
 
 .Nav-Bar {
   height: 100px;
-  /* background-color: pink; */
-}
-
-.profile {
-  margin-top: -37px;
-  display: flex;
-  justify-content: right;
+  background-color: pink;
 }
  
 img.dot {
@@ -34,17 +25,12 @@ img.dot {
     display: inline-block;
 }
 
-.mapContainerStyle {
-  display: flex;
-  justify-content: center;
-  /* width: 60vw;
-  height: 75vh; */
-}
 
-/* .log {
+
+.log {
    display: flex;
    justify-content: right;
-}  */
+}  
 
 div.userlogin {
   display: flex;
@@ -56,4 +42,34 @@ div.userlogin {
   transform: translateX(-50%);
   max-width: 400px;
   z-index: 10;
+}
+
+
+*/
+.locate {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+} 
+
+.mapContainerStyle {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  padding: 2rem;
+  background-image: linear-gradient(to right, rgb(52, 91, 75), rgb(51, 139, 147));
+}
+
+img {
+  height: 30px;
+  width: 30px;
+}
+
+.profile {
+  margin-top: -37px;
+  display: flex;
+  justify-content: right;
 }
