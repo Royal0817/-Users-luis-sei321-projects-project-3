@@ -8,9 +8,14 @@ import Map from './components/Map'
 // import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router'
 import LoginButton from './components/LoginButton'
+import { useAuth0 } from '@auth0/auth0-react'
+import SignIn from './components/SignIn'
 
 function Main() {
+  const {isAuthenticated} = useAuth0()
+  if (isAuthenticated) 
   return (
+    
     <>
       <div className='Nav-Bar'>
         <Outlet />
@@ -21,8 +26,14 @@ function Main() {
       <div className='mapContainerStyle'>
         <Map />
       </div>
-    </>
-  );
+    </>) 
+    if(!isAuthenticated) return (
+      <>
+      <h1> Sign in to get started </h1>
+      <SignIn />
+      </>
+    )
+
 }
 
 export default Main;

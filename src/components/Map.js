@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef} from 'react'
 import { useLoadScript, GoogleMap, Marker, InfoWindow} from '@react-google-maps/api'
 // import Search from './Search'
 // import Locate from './Search'
-// import {Search, Locate } from './Search' not working? 
+// import {Search, Locate } from './Search' 
 import usePlacesAutoComplete, {
     getGeocode,
     getLatLng,
@@ -16,27 +16,29 @@ import {
 } from '@reach/combobox';
 import '@reach/combobox/styles.css';
 
-
-const center = { lat: 38.8960499, lng: -77.0648878}
-const options = { 
-    mapId: process.env.REACT_APP_MAP_ID,
-    disableDefaultUI: true,
-    zoomControl: true
-};
+const libraries = ['places'];
 
 const mapContainerStyle = {
     width: '60vw',
     height: '75vh',
 };
 
-const libraries = ['places'];
+const options = { 
+    mapId: process.env.REACT_APP_MAP_ID,
+    disableDefaultUI: true,
+    zoomControl: true
+};
+
+const center = { lat: 38.8960499, lng: -77.0648878 }
+
+
 
 const Map = () => {
     
     const { isLoaded, LoadError  } = useLoadScript ({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
-        googleMapsPlaces: process.env.REACT_APP_PLACES_API,
-        libraries
+        // googleMapsPlaces: process.env.REACT_APP_PLACES_API,
+        libraries,
     });
 
     const [markers, setMarkers] = useState([]); 
@@ -48,10 +50,9 @@ const Map = () => {
             ...current, 
             {
             lat: e.latLng.lat(),
-            lng: e.latLng.lng(), 
-            time: new Date() 
+            lng: e.latLng.lng(),
             },
-        ])
+        ]);
     }, []);
 
 
@@ -59,6 +60,7 @@ const Map = () => {
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
+        
     }, []);
 
     const panTo = useCallback(({ lat, lng }) => {
@@ -68,28 +70,30 @@ const Map = () => {
     
 
     if (LoadError) return 'Error Loading Maps';
-    if (!isLoaded) return  <h1>Loading....</h1>; 
+    if (!isLoaded) return 'Loading....'; 
     
 
     return (
         <>
         <Search panTo={panTo} />
         <Locate panTo={panTo} />
+
         {/* // Renders map onto page */}
         <GoogleMap 
-            className='map'
+            id='map'
             mapContainerStyle={mapContainerStyle} 
             zoom={13} 
             center={center} 
             options={options} 
             onClick={onMapClick}
             onLoad={onMapLoad}>  
+            
 
         {/* Sets marker for reccomendation */}
         {markers.map((marker) => (
             <Marker 
                 // key={marker.time.toISOString()} 
-                key={`${marker.lat}-${marker.lng}`}
+                key={`${marker.lat},${marker.lng}`}
                 position={{ lat: marker.lat, lng: marker.lng}} 
                 onClick={() => {
                     setMarkerSelected(marker)
@@ -97,23 +101,20 @@ const Map = () => {
         ))} 
         {markerSelect ? (
             <InfoWindow position={{lat: markerSelect.lat, lng: markerSelect.lng}}
-            onCloseClick={() => {
-                setMarkerSelected(null);
-              }}>
-                <div className='Referred'> 
-                    <h2>
-                        Referred by me
-                    </h2>
-                </div> 
-        </InfoWindow>
+                onCloseClick={() => {
+                    setMarkerSelected(null);
+                }}>
+                    <div className='Referred'> 
+                        <h2>
+                            hi
+                        </h2>
+                    </div> 
+            </InfoWindow>
         ): null}
         </GoogleMap>
-
         </>
-
-        )
-    } 
-
+    ); 
+}
 
 function Locate({ panTo }) {
     return (
@@ -146,7 +147,9 @@ function Search({ panTo }) {
         = usePlacesAutoComplete({
         requestOptions: {
             location: { lat: () => 38.8960499, lng: () => -77.0648878 },
-            radius: 150 * 1000, 
+            radius: 150 * 1000,
+            
+            
         },
     });
 
@@ -174,11 +177,10 @@ return (
                 value={ value }
                 onChange={ handleInput }
                 disabled={ !ready }
-                placeholder='Search a bar or something'
-            />
+                placeholder='Search a bar or something'/>
             <ComboboxPopover>
                 <ComboboxList>
-                {status === 'OK' && data.map(({ id, description }) => (
+                {status === 'OK' && data.map(({ description, id}) => (
                     <ComboboxOption key={id} value={description} />
                     ))}
                 </ComboboxList>
@@ -189,5 +191,6 @@ return (
 }
     
   
+
 
 export default Map

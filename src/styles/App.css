@@ -47,11 +47,14 @@ div.userlogin {
 
 */
 .locate {
+  border-radius: 20%;
   display: flex;
   justify-content: center;
   height: 30px;
   width: 30px;
 } 
+
+
 
 .mapContainerStyle {
   display: flex;
@@ -66,10 +69,21 @@ body {
 img {
   height: 30px;
   width: 30px;
+  border-radius: 20%;
 }
+img:hover {
+  cursor: pointer;
+}
+
 
 .profile {
   margin-top: -37px;
   display: flex;
   justify-content: right;
+}
+
+input {
+  width: 400px;
+  height: 30px;
+  border-radius: 5px;
 }
