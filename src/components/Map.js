@@ -1,9 +1,10 @@
-import React, { useState, useCallback, useRef} from 'react'
+import React, { useState, useCallback, useRef, useMemo} from 'react'
 import { useLoadScript, GoogleMap, Marker, InfoWindow} from '@react-google-maps/api'
+// import place_id from '@react-google-places/api'
 // import Search from './Search'
 // import Locate from './Search'
 // import {Search, Locate } from './Search' 
-import usePlacesAutoComplete, {
+import usePlacesAutocomplete,{  
     getGeocode,
     getLatLng,
 } from 'use-places-autocomplete';
@@ -29,56 +30,52 @@ const options = {
     zoomControl: true
 };
 
-const center = { lat: 38.8960499, lng: -77.0648878 }
-
-
 
 const Map = () => {
     
     const { isLoaded, LoadError  } = useLoadScript ({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API,
-        // googleMapsPlaces: process.env.REACT_APP_PLACES_API,
+        googleMapsPlaces: process.env.REACT_APP_PLACES_API,
         libraries,
     });
-
+    
+    const center = useMemo(() => ({ lat: 38.8960499, lng: -77.0648878 }), []);
     const [markers, setMarkers] = useState([]); 
-
+    
     const [markerSelect, setMarkerSelected] = useState(null);
-
+    
     const onMapClick = useCallback((e) => {
         setMarkers((current) => [
             ...current, 
             {
-            lat: e.latLng.lat(),
-            lng: e.latLng.lng(),
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng(),
             },
         ]);
     }, []);
-
-
+    
     //allows to call map wihtout rerendering 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
         
     }, []);
-
+    
+    // sets marker in locate and search 
     const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
         mapRef.current.setZoom(14);
-      }, []);
+    }, []);
     
-
     if (LoadError) return 'Error Loading Maps';
     if (!isLoaded) return 'Loading....'; 
     
-
     return (
         <>
-        <Search panTo={panTo} />
+        <PlacesAutocomplete setMarkerSelected={setMarkerSelected} position={setMarkerSelected}/>
         <Locate panTo={panTo} />
 
-        {/* // Renders map onto page */}
+        {/* rendered map */}
         <GoogleMap 
             id='map'
             mapContainerStyle={mapContainerStyle} 
@@ -87,110 +84,102 @@ const Map = () => {
             options={options} 
             onClick={onMapClick}
             onLoad={onMapLoad}>  
-            
+        
+            {/* Sets marker for reccomendation */}
+            {markers.map((marker) => (
+                <Marker 
+                    // key={marker.time.toISOString()} 
+                    key={`${marker.lat},${marker.lng}`}
+                    position={{ lat: marker.lat, lng: marker.lng}} 
+                    onClick={() => {
+                        setMarkerSelected(marker)
+                    }}
+                />
+            ))}
 
-        {/* Sets marker for reccomendation */}
-        {markers.map((marker) => (
-            <Marker 
-                // key={marker.time.toISOString()} 
-                key={`${marker.lat},${marker.lng}`}
-                position={{ lat: marker.lat, lng: marker.lng}} 
-                onClick={() => {
-                    setMarkerSelected(marker)
-                }}/>
-        ))} 
-        {markerSelect ? (
-            <InfoWindow position={{lat: markerSelect.lat, lng: markerSelect.lng}}
-                onCloseClick={() => {
-                    setMarkerSelected(null);
-                }}>
-                    <div className='Referred'> 
-                        <h2>
-                            hi
-                        </h2>
-                    </div> 
-            </InfoWindow>
-        ): null}
+            {/* {markerSelect ? (
+                <InfoWindow position={{lat: markerSelect.lat, lng: markerSelect.lng}}
+                    onCloseClick={() => {
+                        setMarkerSelected();
+                    }}
+                >
+                   <Marker />
+                </InfoWindow>            
+            ): null} */}
+
+            {markerSelect && <Marker position={markerSelect}/>}
+            
         </GoogleMap>
+        
         </>
     ); 
 }
 
 function Locate({ panTo }) {
     return (
-        <button
-            className='locate'
+        <button className='locate'
             onClick={() => {
                 navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    panTo({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                    });
+                    (position) => {
+                        panTo({
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        });
                 },
                 () => null
                 );
             }}
-        >
-        <img src='https://www.kindpng.com/picc/m/11-115956_icon-google-maps-compass-north-hd-png-download.png' alt='compass' />
+            >
+            <img src='https://www.kindpng.com/picc/m/11-115956_icon-google-maps-compass-north-hd-png-download.png' alt='compass' />
         </button>
+
     );
 }
 
-function Search({ panTo }) {
+const PlacesAutocomplete = ({ setMarkerSelected }) => {
     const {
-        ready, 
-        value, 
-        suggestions: { status, data },
+        ready,
+        value,
         setValue,
-        clearSuggestions, } 
-        = usePlacesAutoComplete({
-        requestOptions: {
-            location: { lat: () => 38.8960499, lng: () => -77.0648878 },
-            radius: 150 * 1000,
-            
-            
-        },
-    });
-
-    const handleInput = (e) => {
-        setValue(e.target.value);
-        };
-
-    const handleSelect = async (address) => {
+        suggestions: { status, data },
+        clearSuggestions,
+    } = usePlacesAutocomplete();
+    
+    const handleSelect = async (address: string) => {
         setValue(address, false);
         clearSuggestions();
-
-        try {
-            const results = await getGeocode({ address });
-            const { lat, lng } = await getLatLng(results[0]);
-            panTo({ lat, lng });
-        } catch (error) {
-            console.log('Error with Geocode ', error);
-        }
+        
+        const results = await getGeocode({ address });
+        const { lat, lng } = await getLatLng(results[0]);
+        setMarkerSelected({ lat, lng }) ;
+        
     };
-
-return (
-    <div className='search'>
-        <Combobox onSelect={ handleSelect }>
+    
+    return (
+        <>
+        <Combobox onSelect={handleSelect}>
+            
             <ComboboxInput
-                value={ value }
-                onChange={ handleInput }
-                disabled={ !ready }
-                placeholder='Search a bar or something'/>
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                disabled={!ready}
+                className='combobox-input'
+                placeholder='Search an address or bar'
+            />
             <ComboboxPopover>
                 <ComboboxList>
-                {status === 'OK' && data.map(({ description, id}) => (
-                    <ComboboxOption key={id} value={description} />
-                    ))}
+                    {status === 'OK' &&
+                    data.map(({ place_id, description}) => (
+                            <ComboboxOption key={place_id} value={description}/>
+                        ))}
+                        {/* {data.map(({place_id, description}) => (
+                            console.log({data})
+                        ))} */}
                 </ComboboxList>
             </ComboboxPopover>
-        </Combobox>
-    </div>
+      </Combobox>
+      </>
     );
-}
-    
-  
-
+  };
 
 export default Map

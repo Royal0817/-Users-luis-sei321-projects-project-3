@@ -4,6 +4,7 @@ import React from 'react'
 // import LoginButton from './LoginButton';
 import Profile from './Profile';
 import { Link } from 'react-router-dom'
+// import PlacesAutocomplete from './Map'
 
 const Nav = (props) => {
   return (
@@ -19,7 +20,7 @@ const Nav = (props) => {
 
       <div>
         <Profile />
-        
+        {/* <PlacesAutocomplete setMarkerSelected={setMarkerSelected} /> */}
       </div>
     </>
   )

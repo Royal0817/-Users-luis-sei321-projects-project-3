@@ -47,7 +47,7 @@ div.userlogin {
 
 */
 .locate {
-  border-radius: 20%;
+  /* border-radius: 20%; */
   display: flex;
   justify-content: center;
   height: 30px;
@@ -69,7 +69,7 @@ body {
 img {
   height: 30px;
   width: 30px;
-  border-radius: 20%;
+  /* border-radius: 20%; */
 }
 img:hover {
   cursor: pointer;
