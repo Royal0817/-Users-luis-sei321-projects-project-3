@@ -20,7 +20,7 @@ import '@reach/combobox/styles.css';
 const libraries = ['places'];
 
 const mapContainerStyle = {
-    width: '60vw',
+    width: '96vw',
     height: '75vh',
 };
 
@@ -61,19 +61,19 @@ const Map = () => {
         
     }, []);
     
-    // sets marker in locate and search 
-    const panTo = useCallback(({ lat, lng }) => {
-        mapRef.current.panTo({ lat, lng });
-        mapRef.current.setZoom(14);
-    }, []);
+    // gets to marker 
+    // const panTo = useCallback(({ lat, lng }) => {
+    //     mapRef.current.panTo({ lat, lng });
+    //     mapRef.current.setZoom(14);
+    // }, []);
     
     if (LoadError) return 'Error Loading Maps';
     if (!isLoaded) return 'Loading....'; 
     
     return (
         <>
-        <PlacesAutocomplete setMarkerSelected={setMarkerSelected} position={setMarkerSelected}/>
-        <Locate panTo={panTo} />
+        <PlacesAutocomplete setMarkerSelected={setMarkerSelected}/>
+        <Locate setMarkerSelected={setMarkerSelected} />
 
         {/* rendered map */}
         <GoogleMap 
@@ -115,13 +115,13 @@ const Map = () => {
     ); 
 }
 
-function Locate({ panTo }) {
+function Locate({ setMarkerSelected }) {
     return (
         <button className='locate'
             onClick={() => {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
-                        panTo({
+                        setMarkerSelected({
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
                         });

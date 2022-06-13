@@ -1,29 +1,16 @@
 /* 
 
 
-button {
-  margin: 1em;
-  padding: 1em 2em;
-  cursor: pointer;
-}
+
 
 #root {
   height: 100px;
   background-color: green;
 } 
 
-.Nav-Bar {
-  height: 100px;
-  background-color: pink;
-}
+
  
-img.dot {
-    height: 50px;
-    width: 50px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-}
+
 
 
 
@@ -32,11 +19,7 @@ img.dot {
    justify-content: right;
 }  
 
-div.userlogin {
-  display: flex;
-  justify-content: right;
 
-}
 
 .search {
   transform: translateX(-50%);
@@ -46,6 +29,44 @@ div.userlogin {
 
 
 */
+
+
+
+.Nav-Bar {
+  height: 100px;
+  background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+  background-size: 1800% 1800%; 
+  -webkit-animation: rainbow 18s ease infinite;
+-z-animation: rainbow 18s ease infinite;
+-o-animation: rainbow 18s ease infinite;
+  animation: rainbow 18s ease infinite;}
+
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+
+div.userlogin {
+  display: flex;
+  justify-content: right;
+  margin-right: 15px;
+}
 .locate {
   /* border-radius: 20%; */
   display: flex;
@@ -54,16 +75,29 @@ div.userlogin {
   width: 30px;
 } 
 
+img.dot {
+  height: 50px;
+  width: 50px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 20px;
+}
 
 
 .mapContainerStyle {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+}
+
+.username {
+  margin-right: 15px;
 }
 
 body {
   padding: 2rem;
-  background-image: linear-gradient(to right, rgb(52, 91, 75), rgb(51, 139, 147));
+  background-color: black;
 }
 
 img {
@@ -77,13 +111,23 @@ img:hover {
 
 
 .profile {
-  margin-top: -37px;
+  margin-top: -25px;
   display: flex;
   justify-content: right;
 }
 
-input {
-  width: 400px;
+input.combobox-input {
+  display: flex;
+  justify-content: center;
+  width: 95vw;
   height: 30px;
   border-radius: 5px;
+  
 }
+
+.locate {
+  display: flex;
+  /* justify-content: right; */
+}
+
+

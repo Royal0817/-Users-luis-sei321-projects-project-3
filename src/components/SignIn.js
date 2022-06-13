@@ -7,11 +7,7 @@ import LogoutButton from './LogoutButton'
 function SignIn() {
 
     return (
-        <div className='log'>
-            <LoginButton />
-            <LogoutButton />
-        
-        </div>
+    <h1>hello</h1>
        )
 }
 

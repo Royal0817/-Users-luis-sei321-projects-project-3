@@ -4,7 +4,7 @@ import './styles/index.css';
 import Main from './App';
 
 import { Auth0Provider } from '@auth0/auth0-react'; 
-// import SignIn from './components/SignIn.js'
+import SignIn from './components/SignIn.js'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom'
 
@@ -22,7 +22,7 @@ root.render(
       >
           <Routes>
             <Route path='/' element={<Main />} >
-              {/* <Route path='signin/' element={<SignIn />} /> */}
+              <Route path='signin/' element={<SignIn />} />
             </Route>
           </Routes>
         </Auth0Provider>

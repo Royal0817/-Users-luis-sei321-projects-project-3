@@ -6,17 +6,17 @@ import LoginButton from './LoginButton';
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
+  const { name, picture } = user;
     return (
       isAuthenticated &&
       <>
         <div className='profile'>
+          <h3 className='username'> Welcome {user.name}</h3>
           <img className='dot' src={user.picture} alt={user.name}/>
-          <h3> Welcome {user.name}</h3>
-        
-        <LoginButton />
-        <LogoutButton />
         </div>
-      </>
+        <LogoutButton />
+        <LoginButton />
+        </>
     )
 }
 
